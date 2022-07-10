@@ -1,0 +1,115 @@
+.popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    z-index: 21;
+
+
+}
+
+.popup-inner {
+    position: absolute;
+    padding: 32px;
+    width: 100%;
+    max-width: 640px;
+    background-color: black;
+    z-index: 22;
+
+}
+
+.popup-inner .close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+
+}
+
+
+.login-modal {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    padding: 50px 30px;
+    background-image: linear-gradient(to bottom, #00BC7E, #108775);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+}
+
+.login-modal h1 {
+    color: #FFF;
+    font-size: 36px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.err-msg {
+    padding: 10px 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    color: red;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.login-modal .form-group {
+    margin-bottom: 30px;
+}
+
+.login-modal label {
+    display: block;
+    color: #eee;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.login-modal input {
+    appearance: none;
+    background: none;
+    outline: none;
+    border: none;
+}
+
+.login-modal input:not([type="submit"]) {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    transition: 0.4s;
+    color: #222;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.login-modal input:not([type="submit"])::placeholder {
+    color: #CCC;
+}
+
+.login-modal input:not([type="submit"]):focus,
+.login-modal input:not([type="submit"]):valid {
+    background-color: #fff;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.modal-submit {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #2F4960;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+    transition: 0.4s;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+}
