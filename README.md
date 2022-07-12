@@ -15,25 +15,31 @@ A simulation of the popular online casino game "crash" with accurate casino odds
 
 ### Setup and Run Client 
 
-    #Navigate to client directory 
+    // Navigate to client directory 
     $ cd ./client
     
-    #install nodemon for development
-    $ npm i -D nodemon
+    // install packages
+    $ npm i 
     
-    #start client (localhost:3000)
+    // start client (localhost:3000)
     $ npm start
     
-    #For running in production
+    // For running in production
     $ npm run build
     $ npm start
 
 ### Setup and Run Server
 
-    #Navigate to server directory 
+    // Navigate to server directory 
     $ cd ./backend
     
-    #start node server (localhost:4000) and socket.io server (localhost:3001) 
+    // install packages
+    $ npm i 
+    
+    // install nodemon for development
+    $ npm i -D nodemon
+    
+    // start node server (localhost:4000) and socket.io server (localhost:3001) 
     $ npm start 
 
 ### Environment Variables 
