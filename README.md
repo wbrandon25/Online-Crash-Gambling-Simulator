@@ -36,8 +36,11 @@ A simulation of the popular online casino game "crash" with accurate casino odds
 * Live Line Chart - Visualization of the current multiplier with respect to time. 
 
 ## Installation 
-    # Clone the repository
+    // Clone the repository
     $ git clone https://github.com/RobotBear/Online-Crash-Gambling-Simulator
+    
+    // Navigate to directory
+    $ cd ./Online-Crash-Gambling-Simulator
 
 ### Setup and Run Client
 
