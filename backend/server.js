@@ -32,6 +32,7 @@ const Stopwatch = require('statman-stopwatch');
 const { update } = require("./models/user");
 const sw = new Stopwatch(true);
 
+// Start Socket.io Server
 const server = http.createServer(app)
 const io = new Server(server, {
   cors: {
@@ -49,6 +50,7 @@ server.listen(3001, () => {
 
 })
 
+// Connect to MongoDB 
 mongoose.connect(
   process.env.MONGOOSE_DB_LINK,
   {
@@ -60,6 +62,7 @@ mongoose.connect(
   }
 );
 
+// Backend Setup
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
@@ -81,6 +84,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 require("./passportConfig")(passport);
 
+//Passport.js login/register system
 app.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) throw err;
@@ -118,6 +122,7 @@ app.post("/register", (req, res) => {
   });
 });
 
+// Routes
 app.get("/user", checkAuthenticated, (req, res) => {
   res.send(req.user);
 });
@@ -364,6 +369,7 @@ const cashout = async () => {
   await theLoop.save()
 }
 
+// Run Game Loop
 let phase_start_time = Date.now()
 const pat = setInterval(async () => {
   await loopUpdate()
@@ -377,6 +383,7 @@ let cashout_phase = true
 let game_crash_value = -69
 let sent_cashout = true
 
+// Game Loop
 const loopUpdate = async () => {
   let time_elapsed = (Date.now() - phase_start_time) / 1000.0
   if (betting_phase) {
