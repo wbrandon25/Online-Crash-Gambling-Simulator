@@ -19,8 +19,6 @@ function App() {
   const [loginPassword, setLoginPassword] = useState("");
   const [betAmount, setBetAmount] = useState(localStorage.getItem("local_storage_wager") || 100)
   const [autoPayoutMultiplier, setAutoPayoutMultiplier] = useState(localStorage.getItem("local_storage_multiplier") || 2)
-
-
   const [userData, setUserData] = useState(null);
   const [multiplier, setMultiplier] = useState(null)
   const [liveMultiplier, setLiveMultiplier] = useState('CONNECTING...')
@@ -39,7 +37,6 @@ function App() {
   const [liveBettingTable, setLiveBettingTable] = useState()
   const [errorMessage, setErrorMessage] = useState('')
   const [authResponseMessage, setAuthResponseMessage] = useState('')
-
   const [globalTimeNow, setGlobalTimeNow] = useState(0)
   const [openModalLogin, setOpenModalLogin] = useState(false);
   const [openModalRegister, setOpenModalRegister] = useState(false);
@@ -47,27 +44,18 @@ function App() {
   const [chartOptions, setChartOptions] = useState({});
   const [chartSwitch, setChartSwitch] = useState(false)
   const [gamePhaseTimeElapsed, setGamePhaseTimeElapsed] = useState()
-  const [labels, setLabels] = useState([0])
-  const [dataForEachLabel, setDataForEachLabel] = useState([0])
-  const [novalue, setnovalue] = useState(["this is the first value!"])
   const [startTime, setStartTime] = useState()
   const [streakList, setStreakList] = useState([])
-  const [redStreak, setRedStreak] = useState()
   const [tenNumbers, setTenNumbers] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
 
   const multiplierCount = useRef([])
   const timeCount_xaxis = useRef([])
   const realCounter_yaxis = useRef(5)
 
-
-
-
-
   useEffect(() => {
     retrieve();
     const socket = io.connect("http://localhost:3001")
     setGlobalSocket(socket)
-
 
     socket.on('news_by_server', function (data) {
       setAnnouncement(data);
@@ -98,8 +86,6 @@ function App() {
       let blue_counter = 0
       let red_counter = 0
 
-
-
       for (let i = 0; i < data.length; i++) {
         if (new_data[i] >= 2) {
           blue_counter += 1
@@ -115,14 +101,11 @@ function App() {
     })
 
     socket.on("get_round_id_list", function (data) {
-
       setRoundIdList(data.reverse())
-
     })
 
     socket.on("start_betting_phase", function (data) {
       setGlobalTimeNow(Date.now())
-
       setLiveMultiplier("Starting...")
       setbBettingPhase(true)
       setLiveBettingTable(null)
@@ -134,7 +117,6 @@ function App() {
     })
 
     socket.on("receive_message_for_chat_box", (data) => {
-
       get_chat_history()
     })
 
@@ -142,13 +124,7 @@ function App() {
 
       setLiveBettingTable(data)
       data = JSON.parse(data)
-
-
-
       setTenNumbers(Array((10 - data.length)).fill(2))
-
-
-
     })
 
     return () => {
@@ -156,21 +132,17 @@ function App() {
     }
   }, []);
 
-
   useEffect(() => {
     if (hookToNextRoundBet) {
       if (bBetForNextRound) {
         send_bet()
       } else {
 
-
       }
-
       setHookToNextRoundBet(false)
       setbBetForNextRound(false)
     }
   }, [hookToNextRoundBet])
-
 
   useEffect(() => {
     if ((betActive && (autoPayoutMultiplier <= liveMultiplier))) {
@@ -248,7 +220,6 @@ function App() {
     localStorage.setItem("local_storage_multiplier", autoPayoutMultiplier);
   }, [betAmount, autoPayoutMultiplier])
 
-
   useEffect(() => {
     get_game_status()
     getUser()
@@ -258,19 +229,14 @@ function App() {
     let getActiveBettorsTimer = setTimeout(() => retrieve_active_bettors_list(), 1000);
     let getBetHistory = setTimeout(() => retrieve_bet_history(), 1000);
 
-
     return () => {
       clearTimeout(getChatHistoryTimer);
       clearTimeout(getActiveBettorsTimer);
       clearTimeout(getBetHistory);
-
     };
   }, [])
 
-
   useEffect(() => {
-
-
 
   }, [liveBettingTable])
 
@@ -289,7 +255,6 @@ function App() {
     }).then((res) => {
       setAuthResponseMessage(res.data)
 
-
       if (res.data == "Username already exists") {
         return
       }
@@ -305,15 +270,12 @@ function App() {
         setAuthResponseMessage(res.data)
         getUser()
 
-
-
         if (res.data === 'Login Successful') {
           setOpenModalRegister(false)
           registerAndLoginToast()
 
         }
       })
-
     });
   };
 
@@ -328,17 +290,13 @@ function App() {
       url: API_BASE + "/login",
     }).then((res) => {
       setAuthResponseMessage(res.data)
-
-
       getUser()
 
       if (res.data === 'Login Successful') {
         setOpenModalLogin(false)
         loginToast()
-
       }
     })
-
   };
 
   const getUser = () => {
@@ -347,16 +305,13 @@ function App() {
       withCredentials: true,
       url: API_BASE + "/user",
     }).then((res) => {
-
       setUserData(res.data);
-
     });
   };
   const logout = () => {
     Axios.get(API_BASE + "/logout", {
       withCredentials: true
     }).then(res => {
-
       getUser()
       logoutToast()
     })
@@ -368,9 +323,7 @@ function App() {
     }).then(res => {
 
       if (res.data !== "No User Authentication") {
-
         setUserData(res.data)
-
       }
     })
   }
@@ -379,9 +332,7 @@ function App() {
     Axios.get(API_BASE + "/generate_crash_value", {
       withCredentials: true
     }).then(res => {
-
       setMultiplier(res.data)
-
     })
   }
 
@@ -389,9 +340,7 @@ function App() {
     Axios.get(API_BASE + "/retrieve", {
       withCredentials: true
     }).then(res => {
-
       setMultiplier(res.data)
-
     })
   }
 
@@ -408,12 +357,9 @@ function App() {
       setBetActive(true)
       userData.balance -= betAmount
       setUserData(userData)
-
     })
       .catch(err => {
-
         if (err.response) {
-
         }
       })
   }
@@ -422,10 +368,7 @@ function App() {
     Axios.get(API_BASE + "/calculate_winnings", {
       withCredentials: true
     }).then(res => {
-
-
       getUser()
-
     })
   }
 
@@ -434,30 +377,21 @@ function App() {
       withCredentials: true
     }).then(res => {
       if (res.data.phase === 'betting_phase') {
-
-
         setGlobalTimeNow(res.data.info)
         setbBettingPhase(true)
-
       } else if (res.data.phase === 'game_phase') {
         setGlobalTimeNow(res.data.info)
         setLiveMultiplierSwitch(true)
       }
-
-
     })
   }
-
 
   const manual_cashout_early = () => {
     Axios.get(API_BASE + "/manual_cashout_early", {
       withCredentials: true
     }).then(res => {
-
       setUserData(res.data)
-
       setBetActive(false)
-
     })
   }
 
@@ -465,11 +399,8 @@ function App() {
     Axios.get(API_BASE + "/auto_cashout_early", {
       withCredentials: true
     }).then(res => {
-
       setUserData(res.data)
-
       setBetActive(false)
-
     })
   }
 
@@ -487,8 +418,6 @@ function App() {
       url: API_BASE + "/send_message_to_chatbox",
     }).then((res) => {
       setMessageToTextBox('')
-
-
     })
   };
 
@@ -496,11 +425,7 @@ function App() {
     Axios.get(API_BASE + "/get_chat_history", {
       withCredentials: true
     }).then(res => {
-
-
-
       setChatHistory(res.data)
-
     })
   }
 
@@ -509,9 +434,6 @@ function App() {
       withCredentials: true
     }).then(res => {
 
-
-
-
     })
   };
 
@@ -519,8 +441,6 @@ function App() {
     Axios.get(API_BASE + "/retrieve_bet_history", {
       withCredentials: true
     }).then(res => {
-
-
 
     })
   };
@@ -547,17 +467,14 @@ function App() {
     const validated = text.match(/^(\d*\.{0,1}\d{0,2}$)/)
     const re = /^[0-9\b]+$/;
 
-
     if (text === '' || re.test(text)) {
       setBetAmount(text)
     }
-
     if (text > userData.balance) {
       setErrorMessage("Bet greater than balance")
     } else {
       setErrorMessage('')
     }
-
   };
 
   const verifyMultiplierAmount = (text) => {
@@ -566,8 +483,6 @@ function App() {
       setAutoPayoutMultiplier(text)
     }
   };
-
-
 
   const loginToast = () => {
     toast.success('Login Successful', {
@@ -611,19 +526,11 @@ function App() {
     });
   };
 
-
-
-
-
   const temp_time = Date.now()
 
   useEffect(() => {
     const temp_interval = setInterval(() => {
       setChartSwitch(false)
-
-
-
-
       sendToChart()
     }, 1)
 
@@ -639,7 +546,6 @@ function App() {
 
       datasets: [
         {
-
           data: multiplierCount.current,
           backgroundColor: "rgba(75,192,192,0.2)",
           borderColor: "rgba(75,192,192,1)",
@@ -650,7 +556,6 @@ function App() {
           lineTension: 0.1,
         },
       ],
-
     });
     setChartOptions({
       events: [],
@@ -675,10 +580,8 @@ function App() {
             maxTicksLimit: 5,
             callback: function (value, index, values) {
               if (value % 0.5 == 0) return (parseFloat(value)).toFixed(2)
-
             }
           },
-
           grid: {
             display: true,
             color: 'white'
@@ -701,22 +604,17 @@ function App() {
               } else {
                 if (value % 10 == 0) return value
               }
-
             }
-
           },
           grid: {
             display: true,
             color: 'white'
           },
         },
-
       },
       plugins: {
-
         legend: { display: false },
       },
-
       animation: {
         x: {
           type: 'number',
@@ -733,36 +631,23 @@ function App() {
           delay: 0
         },
         loop: true,
-
-
       },
-
-
     }
-
     );
   }
-
-
 
   return (
 
     <div className="App">
-
-
       <div>
         <ToastContainer />
 
         <Modal trigger={openModalLogin} setTrigger={setOpenModalLogin}>
-
           <div className="login-modal" >
             <div>
               {authResponseMessage ? (<p class="err-msg">{authResponseMessage}</p>) : ('')}
-
-
               <h1>Login</h1>
             </div>
-
             <div class="form-group">
               <label>Username: </label>
               <input
@@ -783,19 +668,14 @@ function App() {
           </div>
         </Modal>
       </div>
-
-
       <div>
         <Modal trigger={openModalRegister} setTrigger={setOpenModalRegister}>
 
           <div className="login-modal" >
             <div>
               {authResponseMessage ? (<p class="err-msg">{authResponseMessage}</p>) : ('')}
-
-
               <h1>Register</h1>
             </div>
-
             <div class="form-group">
               <label>Username: </label>
               <input
@@ -816,23 +696,11 @@ function App() {
 
             {registerUsername !== '' && registerUsername.length < 3 ? (<span className="register_errors">Username must have at least 3 characters</span>) : ('')} <br />
             {registerPassword !== '' && registerPassword.length < 3 ? (<span className="register_errors">Password must have at least 3 characters</span>) : ('')}
-
           </div>
-
-
-
-
-
           <div>
-
-
-
           </div>
-
         </Modal>
       </div>
-
-
 
       <nav className="navbar">
         <div className="container">
@@ -876,16 +744,10 @@ function App() {
         <div className="grid-elements" >
 
           {<div className="effects-box">
-
-
             <div className="basically-the-graph" style={{ height: '90%', width: '90%', position: "absolute", top: '12%' }}>
               {chartData ? (<SomeChart chartData={chartData} chartOptions={chartOptions} />) : ('')}
             </div>
-
             <div style={{ position: "absolute", zIndex: 12, top: '40%' }}>
-
-
-
               {(() => {
                 if (bBettingPhase) {
                   return <h1>{bettingPhaseTime}</h1>
@@ -894,17 +756,9 @@ function App() {
                   return <h1 className={` ${!liveMultiplierSwitch && liveMultiplier !== 'Starting...' && liveMultiplier !== 'CONNECTING...' ? ("multipler_crash_value_message") : ("")}`}>{liveMultiplier !== "Starting..." ? (liveMultiplier + 'x') : ('Starting...')}</h1>
                 }
               })()}
-
             </div>
           </div>}
-
-
-
-
-
         </div>
-
-
 
         <div className="grid-elements">
           {(userData && userData !== "No User Authentication") ? (
@@ -920,41 +774,29 @@ function App() {
                 value={betAmount}
                 disabled={betActive ? 'disabled' : null}
                 onKeyDown={handleKeyDownBetting}
-
               />
               <br />
-
 
               <h1 className="makeshift-input-group" > Auto Cashout Multiplier</h1>
               <input
                 className="input_box"
                 placeholder="Payout Multiplier"
                 onChange={(e) => verifyMultiplierAmount(e.target.value)}
-
                 onKeyDown={handleKeyDownBetting}
                 value={autoPayoutMultiplier}
                 disabled={betActive ? 'disabled' : null}
-
               />
 
               <br />
               {bBettingPhase && !betActive ? (<button class="css-button css-button-3d css-button-3d--grey" onClick={send_bet}>Send</button>) : (
-
-
                 <>
                   {betActive ? (<div>
                     <button class="css-button css-button-3d css-button-3d--grey" onClick={manual_cashout_early}> {(betActive && liveMultiplier > 1) ? (<span>Cashout at {(liveMultiplier * betAmount).toFixed(2)}</span>) : ("Starting...")}</button>
-
                   </div>) : (<div>
                     <button class={`css-button css-button-3d css-button-3d--grey ${bBetForNextRound ? ('bet_for_next_round_active') : ('')}`} onClick={bet_next_round}>{bBetForNextRound ? ("Cancel Bet") : ("Bet Next round")} </button>
-
                   </div>)}
                 </>
-
               )}
-
-
-
             </div>
           ) : (<h1 > <a href="#" onClick={() => {
             setOpenModalLogin(true)
@@ -971,12 +813,7 @@ function App() {
           <div style={{ color: 'red', fontWeight: 600, marginTop: '5px' }}>{errorMessage}</div>
 
         </div>
-
-
         <div className="grid-elements">Chat <br />
-
-
-
           <div className="chat-box-wrapper">
             <div className="chat-box-rectangle">
               {chatHistory ? (<>
@@ -988,9 +825,7 @@ function App() {
                       <span className="message_top_time">{message.the_time} -&nbsp;
                         {message.the_date} </span> <br />
                       <span className="message_bottom">{message.message_body}</span>
-
                     </div>
-
                   })
                 }
               </>) : (<h1>Loading Chat history </h1>)}
@@ -1010,7 +845,6 @@ function App() {
             (<h3>Log in to send a chat message</h3>)}
 
         </div>
-
 
         <div className="grid-elements">Crash History
           <div class="container-crash-history">
@@ -1035,9 +869,6 @@ function App() {
             </ul>
           </div>
 
-
-
-
         </div>
         <div className="grid-elements">Live Bets Tracker
           <ul class="active-bet-table">
@@ -1060,30 +891,16 @@ function App() {
                           <div class="col col-2">{message.bet_amount}</div>
                           <div class="col col-3" >{message.cashout_multiplier ? (message.cashout_multiplier) : ('--')}</div>
                           <div class="col col-4">{message.profit ? (message.profit.toFixed(2)) : ('--')}</div>
-
                         </li>
-
                       </div>
-
                     </ul>
                   </div>
-
-
-
-
                 })
               }
             </>) : ('')}
 
-
-
-
             <div class="container-crash-history">
               <ul class="active-bet-table">
-
-
-
-
 
                 {tenNumbers.map((someNumber, index, array) => {
                   return <div className="row-bet-wrapper" key={uuidv4()}>
@@ -1093,29 +910,17 @@ function App() {
                       <div class="col col-3" >--</div>
                       <div class="col col-4">--</div>
                     </li>
-
                   </div>
                 })}
 
               </ul>
             </div>
-
-
-
-
-
-
             <div>
-
             </div>
           </div>
         </div>
       </div>
-
-
-
     </div >
-
   );
 }
 
