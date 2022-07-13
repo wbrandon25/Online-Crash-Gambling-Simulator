@@ -52,6 +52,7 @@ function App() {
   const timeCount_xaxis = useRef([])
   const realCounter_yaxis = useRef(5)
 
+  // Socket.io setup
   useEffect(() => {
     retrieve();
     const socket = io.connect("http://localhost:3001")
@@ -132,6 +133,7 @@ function App() {
     }
   }, []);
 
+  // Define useEffects
   useEffect(() => {
     if (hookToNextRoundBet) {
       if (bBetForNextRound) {
@@ -241,7 +243,7 @@ function App() {
   }, [liveBettingTable])
 
 
-
+  // Routes
   const API_BASE = 'http://localhost:4000'
   const register = () => {
     Axios({
@@ -445,7 +447,7 @@ function App() {
     })
   };
 
-
+  // Functions
   const handleKeyDownBetting = (e) => {
     if (e.key === 'Enter') {
       if (bBettingPhase) {
@@ -483,7 +485,8 @@ function App() {
       setAutoPayoutMultiplier(text)
     }
   };
-
+  
+  // Define Toasts
   const loginToast = () => {
     toast.success('Login Successful', {
       position: "top-center",
@@ -540,6 +543,7 @@ function App() {
     }
   }, [chartSwitch])
 
+  // Chart Data
   const sendToChart = () => {
     setChartData({
       labels: timeCount_xaxis.current,
@@ -635,7 +639,8 @@ function App() {
     }
     );
   }
-
+  
+  //JSX
   return (
 
     <div className="App">
