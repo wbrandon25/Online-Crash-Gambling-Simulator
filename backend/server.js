@@ -17,7 +17,9 @@ const GAME_LOOP_ID = '62b7e66b1da7901bfc65df0d'
 
 const { Server } = require('socket.io')
 const http = require('http')
+const Stopwatch = require('statman-stopwatch');
 const { update } = require("./models/user");
+const sw = new Stopwatch(true);
 
 // Start Socket.io Server
 const server = http.createServer(app)
