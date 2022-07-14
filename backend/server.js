@@ -263,7 +263,7 @@ app.get('/auto_cashout_early', checkAuthenticated, async (req, res) => {
     for (const bettorObject of live_bettors_table) {
       if (bettorObject.the_user_id === req.user.id) {
         bettorObject.cashout_multiplier = currUser.payout_multiplier
-        bettorObject.profit = currUser.bet_amount * currUser.payout_multiplier
+        bettorObject.profit = (currUser.bet_amount * current_multiplier) - currUser.bet_amount
         bettorObject.b_bet_live = false
         io.emit("receive_live_betting_table", JSON.stringify(live_bettors_table))
         break
