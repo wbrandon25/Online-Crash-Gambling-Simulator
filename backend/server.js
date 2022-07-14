@@ -11,26 +11,13 @@ const bodyParser = require("body-parser");
 const app = express();
 const User = require("./models/user");
 const Game_loop = require("./models/game_loop")
-const redis = require('redis');
 require('dotenv').config()
 
 const GAME_LOOP_ID = '62b7e66b1da7901bfc65df0d'
 
-const client = redis.createClient({
-  host: 'redis-18140.c60.us-west-1-2.ec2.cloud.redislabs.com',
-  port: 18140,
-  password: 'aRR5XnXcAkBnEyoq3S0A4nlYhAOurDVh'
-});
-
-client.on('error', err => {
-
-});
-
 const { Server } = require('socket.io')
 const http = require('http')
-const Stopwatch = require('statman-stopwatch');
 const { update } = require("./models/user");
-const sw = new Stopwatch(true);
 
 // Start Socket.io Server
 const server = http.createServer(app)
@@ -47,7 +34,6 @@ io.on("connection", (socket) => {
 })
 
 server.listen(3001, () => {
-
 })
 
 // Connect to MongoDB 
@@ -57,9 +43,6 @@ mongoose.connect(
     useNewUrlParser: true,
     useUnifiedTopology: true,
   },
-  () => {
-
-  }
 );
 
 // Backend Setup
@@ -102,7 +85,6 @@ app.post("/login", (req, res, next) => {
 
 app.post("/register", (req, res) => {
   if (req.body.username.length < 3 || req.body.password < 3) {
-
     return
   }
 
@@ -152,9 +134,6 @@ app.get('/generate_crash_value', async (req, res) => {
 })
 
 app.get('/retrieve', async (req, res) => {
-  if (betting_phase) {
-  } else {
-  }
   const game_loop = await Game_loop.findById(GAME_LOOP_ID)
   crashMultipler = game_loop.multiplier_crash
   res.json(crashMultipler)
@@ -219,7 +198,6 @@ app.get('/calculate_winnings', checkAuthenticated, async (req, res) => {
     if (currUser.payout_multiplier <= crash_number) {
       currUser.balance += currUser.bet_amount * currUser.payout_multiplier
       await currUser.save()
-    } else {
     }
   }
   theLoop.active_player_id_list = []
@@ -290,8 +268,6 @@ app.get('/auto_cashout_early', checkAuthenticated, async (req, res) => {
       }
     }
     res.json(currUser)
-  } else {
-
   }
 })
 
@@ -361,8 +337,6 @@ const cashout = async () => {
 
       currUser.balance += currUser.bet_amount * currUser.payout_multiplier
       await currUser.save()
-    } else {
-
     }
   }
   theLoop.active_player_id_list = []
