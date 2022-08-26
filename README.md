@@ -25,7 +25,7 @@ A simulation of the popular online casino game "crash" with accurate casino odds
 * Live Bet Tracker - Users can see other users betting live. When a user places a bet, their username and bet amount are added to a live table. When the user cashes out, their cash out multiplier and profit are also added. 
 * Game History - Displays the crash values of the last 25 games played along with the streak of games with crash values above or below 2.00. 
 * Chat - Users who are logged in can send messages to other users through chat 
-* Live Line Chart - Visualization of the current multiplier with respect to time. 
+* Live Line Graph - Visualization of the current multiplier with respect to time. 
 
 ## Installation 
     // Clone the repository
