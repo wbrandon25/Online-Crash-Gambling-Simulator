@@ -37,7 +37,7 @@ A simulation of the popular online casino game "crash" with accurate casino odds
 
 ## Installation 
     // Clone the repository
-    $ git clone https://github.com/RobotBear/Online-Crash-Gambling-Simulator
+    $ git clone https://github.com/wbrandon25/Online-Crash-Gambling-Simulator
     
     // Navigate to directory
     $ cd ./Online-Crash-Gambling-Simulator
