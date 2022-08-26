@@ -7,22 +7,14 @@ A simulation of the popular online casino game "crash" with accurate casino odds
 ![showcase](https://i.imgur.com/bpXV3zI.png)
 ## Technologies Used 
 
-* [React.js](https://reactjs.org/)
-	* JS framework used to create the frontend.
-*  [Express.js](https://expressjs.com/)
-	* The backend server environment and serves as an API.
-* [Node.js](https://nodejs.org/en/)
-	* JS environment that executes JS outside of the browser.
-* [Socket.io](https://socket.io/)
-	* Allows communication between the server and client in real time. 
-* [MongoDB](https://www.mongodb.com/)
-	* NoSQL database used to store all user and server information. 
-* [Passport.js](https://www.passportjs.org/)
-	* Middleware used to authenticate and authorize users. Handles logins and registrations.
-* [bcrypt.js](https://www.npmjs.com/package/bcrypt)
-	* Secures user passwords by hashing all passwords before storing in database. 
-* [Chart.js](https://www.chartjs.org/)
-	* Create visualizations of data through charts and graphs like line graphs. 
+* [React.js](https://reactjs.org/) - JS framework used to create the frontend.
+*  [Express.js](https://expressjs.com/) - The backend server environment and serves as an API.
+* [Node.js](https://nodejs.org/en/) - JS environment that executes JS outside of the browser.
+* [Socket.io](https://socket.io/) - Allows communication between the server and client in real time. 
+* [MongoDB](https://www.mongodb.com/) - NoSQL database used to store all user and server information. 
+* [Passport.js](https://www.passportjs.org/) - Middleware used to authenticate and authorize users. Handles logins and registrations.
+* [bcrypt.js](https://www.npmjs.com/package/bcrypt) - Secures user passwords by hashing all passwords before storing in database. 
+* [Chart.js](https://www.chartjs.org/) - Create visualizations of data through charts and graphs like line graphs. 
 * HTML
 * CSS
 
