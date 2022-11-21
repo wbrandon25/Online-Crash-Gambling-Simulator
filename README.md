@@ -1,7 +1,7 @@
 
 # Crash Gambling Simulator 
 
-A simulation of the popular online casino game "crash" with accurate casino odds. 
+A recreation of the popular online casino game "crash" with accurate casino odds. 
 
 ![showcase](https://i.imgur.com/bpXV3zI.png)
 ## Technologies Used 
