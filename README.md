@@ -3,7 +3,6 @@
 
 A simulation of the popular online casino game "crash" with accurate casino odds. 
 
-**Demo Link - [Here](https://poetic-mooncake-6b40f0.netlify.app/)**
 ![showcase](https://i.imgur.com/bpXV3zI.png)
 ## Technologies Used 
 
